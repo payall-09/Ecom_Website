@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handmade products | {% block title%}{% endblock title %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+
+    <!-- navbar start -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-warning">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#"><img src="{% static 'app/images/banner/logo.png'%}" width="70" height="40" ></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              {% if request.user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link active text-dark" aria-current="page" href="/">Home</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Products
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="{% url 'category' 'PL'%}">Paper Craft</a></li>
+                  <li><a class="dropdown-item" href="{% url 'category' 'HD'%}">Home decor</a></li>
+                  <li><a class="dropdown-item" href="{% url 'category' 'DD'%}">Diyas</a></li>
+                  <li><a class="dropdown-item" href="{% url 'category' 'LI'%}">Lighting</a></li>
+                  <li><a class="dropdown-item" href="{% url 'category' 'SK'%}">Sketch</a></li>
+                  <li><a class="dropdown-item" href="{% url 'category' 'Cl'%}">Clay art</a></li>
+                  <li><a class="dropdown-item" href="{% url 'category' 'HM'%}">Handicrafts</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-dark" href="about">About us</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-dark" href="contact">Contact</a>
+              </li>
+            </ul>
+            <form class="d-flex" role="search" action="search">
+              <input class="form-control me-2 " type="search" placeholder="Search" name ="search" aria-label="Search">
+              <button class="btn btn-outline-dark" type="submit">Search</button>
+            </form>
+          </div>
+
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item dropdown mx-2">
+              <a class="nav-link dropdown-toggle text-dark" href="#"
+              id="profileDropdown" role="button" data-bs-toggle="dropdown" 
+              aria-expanded="false">Me</a>
+              <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+                <li><a class="dropdown-item" href="profile">Profile</a></li>
+                <li><a class="dropdown-item" href="orders">Orders</a></li>
+                <li><a class="dropdown-item" href="passwordchange">Change Password</a></li>
+                <li><a class="dropdown-item" href="logout">Logout</a></li>
+              </ul>
+            </li>
+            <li class="nav-item mx-2">
+              <a href="cart" class="nav-link text-dark"><span class="badge bg-danger">{% if totalitem > 0 %} {{totalitem}} {% endif %}</span>Cart</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="#">Wishlist</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="login">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="registration">Registration</a>
+            </li>
+            {% endif %}
+          </ul>
+          
+        </div>
+      </nav>
+    <!-- navbar end -->
+
+    {% block banner-slider %}{% endblock banner-slider %}
+    {% block information %}{% endblock information %}
+    {% block main-content %}{% endblock main-content %}
+    {% block payment-gateway %} {% endblock payment-gateway %}
+
+    <!-- footer start -->
+    <footer class="container-fluid fixed-bottom bg-warning  text-center p-2 mt-5">
+    Copyright : 2024 || The Craft Cottage || All Rights Reserved
+    </footer>
+    <!-- footer end -->
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+<script scr="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+</body>
+</html>
